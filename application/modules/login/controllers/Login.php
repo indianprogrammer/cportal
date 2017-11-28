@@ -10,7 +10,7 @@ class Login extends MX_Controller {
 
     public function __Construct() {
         parent::__Construct();
-        $this->load->model('Login_model');
+        //$this->load->model('Login_model');
     }
 
     public function index() {
@@ -40,14 +40,14 @@ class Login extends MX_Controller {
 
 
 
-        $formData = array(
+        $p1Data = array(
             'chillispot' => 'ChilliSpot',
             'title' => 'title here',
             'wait_msg' => 'ChilliSpot',
             'login' => 'Login',
             'logout' => 'Logout'
         );
-        $this->load->view('p1_mobile');
+        $this->load->view('p1_mobile',$p1Data);
     }
 
     public function login() {

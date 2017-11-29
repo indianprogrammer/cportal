@@ -47,12 +47,55 @@ class Login extends MX_Controller {
             'login' => 'Login',
             'logout' => 'Logout'
         );
-        $this->load->view('p1_mobile',$p1Data);
+        $this->load->view('p1_mobile', $p1Data);
     }
 
-    public function login() {
-        $this->load->view('login');
+    #@ajax
+    public function request_opt() {
+        $mobileNo = $this->input->post('mobile_no');
+        #generate random number
+        $otp = rand(1100, 9999);
+        #save it to database with mobile number
+        $this->load->model('Otp_model');
+        if ($this->Otp_model->saveOtp($mobileNo, $otp)) {
+            #send it to mobile
+        }
     }
+
+    #@ajax
+    public function activatePlan($mobileNo, $otp, $tokenNo) {
+        #varify otp
+        $flagOtp = $this->varifyOtp($mobileNo, $otp);
+
+        if($flagOtp){
+            #if correct otp then only varify token
+            $flagToken = $this->varifyToken($tokenNo);
+            if($flagToken){
+                #activate user's plan ()
+                $tokenId = $flagToken->id;
+                $this->activateUserPlan($mobileNo,$tokenId);
+            } 
+        }
+    }
+    
+    private function activateUserPlan($mobileNo,$tokenId) {
+        #user activation
+        echo "user activated $mobileNo $tokenId";
+    }
+
+    private function varifyToken($tokenNo) {
+        #check if token exist  and unused
+        $this->load->model('Token_model');
+        return $this->Token_model->varifyToken($tokenNo);        
+    }
+
+    private function varifyOtp($mobileNo, $otp) {
+        #varify otp and delete
+        $this->load->model('Otp_model');
+        return $this->Otp_model->varifyOtp($mobileNo, $otp);
+    }
+
+    ############################################################################
 
     public function action_login() {
         $username = $this->input->post('username');
@@ -72,14 +115,6 @@ class Login extends MX_Controller {
         } else {
             echo "not found";
         }
-    }
-
-    public function user() {
-        $this->load->view('login_user');
-    }
-
-    public function admin() {
-        $this->load->view('login_admin');
     }
 
 }

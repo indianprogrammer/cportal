@@ -63,11 +63,15 @@ class Login extends MX_Controller {
     }
 
     #@ajax
-    public function activatePlan($mobileNo, $otp, $tokenNo) {
+    public function activate_plan() {
+        $mobileNo = $this->input->post('mobile_no');
+        $otp = $this->input->post('otp');
+        $tokenNo = $this->input->post('token_no');
         #varify otp
         $flagOtp = $this->varifyOtp($mobileNo, $otp);
 
         if($flagOtp){
+            echo 'prob';
             #if correct otp then only varify token
             $flagToken = $this->varifyToken($tokenNo);
             if($flagToken){

@@ -21,9 +21,13 @@ class Token_model extends CI_Model {
             //token not avilable
             return FALSE;
         }
-        //token avilable and return token id
-        
+        //token avilable and return token id        
         return $query->row();
+    }
+
+    function setTokenUsed($tokenId) {
+        $this->db->where('id', $tokenId);
+        $this->db->update($this->tokenTable, array('status'=> 'used'));
     }
 
 }

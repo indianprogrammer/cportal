@@ -10,7 +10,9 @@ class Login extends MX_Controller {
 
     public function __Construct() {
         parent::__Construct();
-        //$this->load->model('Login_model');
+        $this->load->model('Login_model');
+        $this->load->model('Token_model');
+        $this->load->model('Otp_model');
     }
 
     public function index() {
@@ -51,74 +53,61 @@ class Login extends MX_Controller {
     }
 
     #@ajax
-    public function request_opt() {
+
+    public function request_otp() {
         $mobileNo = $this->input->post('mobile_no');
         #generate random number
         $otp = rand(1100, 9999);
         #save it to database with mobile number
         $this->load->model('Otp_model');
         if ($this->Otp_model->saveOtp($mobileNo, $otp)) {
+            #check if user expired or has plana  
+            echo json_encode(array('status'=>$this->checkUserStatus($mobileNo),'otp' =>$otp));          
             #send it to mobile
         }
     }
 
     #@ajax
+
     public function activate_plan() {
         $mobileNo = $this->input->post('mobile_no');
         $otp = $this->input->post('otp');
         $tokenNo = $this->input->post('token_no');
         #varify otp
         $flagOtp = $this->varifyOtp($mobileNo, $otp);
-
-        if($flagOtp){
-            echo 'prob';
+        if ($flagOtp) {
             #if correct otp then only varify token
             $flagToken = $this->varifyToken($tokenNo);
-            if($flagToken){
-                #activate user's plan ()
+            if ($flagToken) {
+                #activate user's plan
                 $tokenId = $flagToken->id;
-                $this->activateUserPlan($mobileNo,$tokenId);
-            } 
+                $this->activateUserPlan($mobileNo, $tokenId);
+            } else {
+                echo json_encode(array('status' => FALSE, 'msg' => 'invalid token'));
+            }
+        } else {
+            echo json_encode(array('status' => FALSE, 'msg' => 'incorrect OTP'));
         }
     }
     
-    private function activateUserPlan($mobileNo,$tokenId) {
+    private function checkUserStatus($mobileNo) {
+        return $this->Login_model->checkUserStatus($mobileNo);
+    }
+
+    private function activateUserPlan($mobileNo, $tokenId) {
         #user activation
-        echo "user activated $mobileNo $tokenId";
+        $this->Login_model->activateUser($mobileNo, $tokenId);
+        $this->Token_model->setTokenUsed($tokenId);
     }
 
     private function varifyToken($tokenNo) {
         #check if token exist  and unused
-        $this->load->model('Token_model');
-        return $this->Token_model->varifyToken($tokenNo);        
+        return $this->Token_model->varifyToken($tokenNo);
     }
 
     private function varifyOtp($mobileNo, $otp) {
         #varify otp and delete
-        $this->load->model('Otp_model');
         return $this->Otp_model->varifyOtp($mobileNo, $otp);
-    }
-
-    ############################################################################
-
-    public function action_login() {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-
-        $authData = $this->Login_model->checkAuth($username, $password);
-        if (!is_null($authData)) {
-            switch ($authData->type) {
-                case 'manager':
-                    echo "manager";
-                    break;
-            }
-
-            #set session data
-            #redirect user
-            redirect('/user');
-        } else {
-            echo "not found";
-        }
     }
 
 }

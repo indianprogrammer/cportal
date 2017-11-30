@@ -16,6 +16,10 @@ class Login extends MX_Controller {
     }
 
     public function index() {
+        $this->load->view('login');
+    }
+
+    public function index_bkp() {
         # Read form parameters which we care about
         $username = $this->input->post('UserName');
         $password = $this->input->post('Password');
@@ -41,14 +45,13 @@ class Login extends MX_Controller {
         $redirurl = $this->input->get('redirurl');
 
 
-
-        $p1Data = array(
+        $p1Data = [
             'chillispot' => 'ChilliSpot',
             'title' => 'title here',
             'wait_msg' => 'ChilliSpot',
             'login' => 'Login',
             'logout' => 'Logout'
-        );
+        ];
         $this->load->view('p1_mobile', $p1Data);
     }
 
@@ -62,8 +65,22 @@ class Login extends MX_Controller {
         $this->load->model('Otp_model');
         if ($this->Otp_model->saveOtp($mobileNo, $otp)) {
             #check if user expired or has plana  
-            echo json_encode(array('status'=>$this->checkUserStatus($mobileNo),'otp' =>$otp));          
+            echo json_encode(['status' => $this->checkUserStatus($mobileNo), 'otp' => $otp]);
             #send it to mobile
+        }
+    }
+
+    #@ajax    
+
+    public function resend_otp() {
+        $mobileNo = $this->input->post('mobile_no');
+        #get otp from database
+        $otp = $this->Otp_model->getOtp($mobileNo);
+        if (is_null($otp)) {
+            echo json_encode(['status' => FALSE,'msg' =>'Error occured']);
+        } else {
+            #send it to mobile
+            echo json_encode(['status' => TRUE, 'otp' => $otp->otp]);
         }
     }
 
@@ -83,13 +100,13 @@ class Login extends MX_Controller {
                 $tokenId = $flagToken->id;
                 $this->activateUserPlan($mobileNo, $tokenId);
             } else {
-                echo json_encode(array('status' => FALSE, 'msg' => 'invalid token'));
+                echo json_encode(['status' => FALSE, 'msg' => 'invalid token']);
             }
         } else {
-            echo json_encode(array('status' => FALSE, 'msg' => 'incorrect OTP'));
+            echo json_encode(['status' => FALSE, 'msg' => 'incorrect OTP']);
         }
     }
-    
+
     private function checkUserStatus($mobileNo) {
         return $this->Login_model->checkUserStatus($mobileNo);
     }

@@ -13,19 +13,19 @@ class Capative_portal extends MX_Controller {
 
     public function index() {
         #collect get requestes
-        $res = $this->input - get('res');
-        $uamip = $this->input - get('uamip');
-        $uamport = $this->input - get('uamport');
-        $challenge = $this->input - get('challenge');
-        $called = $this->input - get('called');
-        $mac = $this->input - get('mac');
-        $ip = $this->input - get('ip');
-        $nasid = $this->input - get('nasid');
-        $userurl = $this->input - get('userurl');
-        $md = $this->input - get('md');
-        
-        
-        
+        $res = $this->input->get('res');
+        $uamip = $this->input->get('uamip');
+        $uamport = $this->input->get('uamport');
+        $challenge = $this->input->get('challenge');
+        $called = $this->input->get('called');
+        $mac = $this->input->get('mac');
+        $ip = $this->input->get('ip');
+        $nasid = $this->input->get('nasid');
+        $userurl = $this->input->get('userurl');
+        $md = $this->input->get('md');
+
+
+
 
 
         $loginData = array(

@@ -100,7 +100,27 @@
         </script>
 
         <style>
-            @import url('https://fonts.googleapis.com/css?family=Poppins');
+            /* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/img/gG8m82oGcrBJF727xHU04fY6323mHUZFJMgTvxaG2iE.woff2')?>) format('woff2');
+  }
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/img/F4YWuALHubF63LLQPw0rMfY6323mHUZFJMgTvxaG2iE.woff2')?>) format('woff2');
+  }
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/img/HLBysyo0MQBO_7E-DWLwzg.woff2')?>) format('woff2');
+  }
 
             /* BASIC */
 

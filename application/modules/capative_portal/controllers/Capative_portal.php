@@ -31,9 +31,15 @@ class Capative_portal extends MX_Controller {
         $loginData = array(
             'title' => 'Login ISPjet',
             'uamip' => $uamip,
-            'uamport' => $uamport
+            'uamport' => $uamport,
+            'userurl' => $userurl,
+            'challenge' => $challenge
         );
         $this->load->view('login', $loginData);
+    }
+    
+    public function popup_login($uamip,$uamport) {
+        echo 'logging in please wait...';
     }
 
 }

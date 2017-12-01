@@ -101,26 +101,26 @@
 
         <style>
             /* devanagari */
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/img/gG8m82oGcrBJF727xHU04fY6323mHUZFJMgTvxaG2iE.woff2')?>) format('woff2');
-  }
-/* latin-ext */
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/img/F4YWuALHubF63LLQPw0rMfY6323mHUZFJMgTvxaG2iE.woff2')?>) format('woff2');
-  }
-/* latin */
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/img/HLBysyo0MQBO_7E-DWLwzg.woff2')?>) format('woff2');
-  }
+            @font-face {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/fonts/gG8m82oGcrBJF727xHU04fY6323mHUZFJMgTvxaG2iE.woff2') ?>) format('woff2');
+            }
+            /* latin-ext */
+            @font-face {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/fonts/F4YWuALHubF63LLQPw0rMfY6323mHUZFJMgTvxaG2iE.woff2') ?>) format('woff2');
+            }
+            /* latin */
+            @font-face {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Poppins Regular'), local('Poppins-Regular'), url(<?= base_url('assets/fonts/HLBysyo0MQBO_7E-DWLwzg.woff2') ?>) format('woff2');
+            }
 
             /* BASIC */
 
@@ -401,14 +401,18 @@
 
                 <!-- Icon -->
                 <div class="fadeIn first">
-                    <img src="<?= base_url('assets/img/icon.svg')?>" id="icon" alt="User Icon" />
+                    <img src="<?= base_url('assets/img/icon.svg') ?>" id="icon" alt="User Icon" />
                 </div>
 
                 <!-- Login Form -->
                 <form>
+                    <input type="hidden" name="challenge" value="<?= $challenge ?>">
+                    <input type="hidden" name="uamip" value="<?= $uamip ?>">
+                    <input type="hidden" name="uamport" value="<?= $uamport ?>">
+                    <input type="hidden" name="userurl" value="<?= $userurl ?>">
                     <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
                     <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <input type="submit" class="fadeIn fourth" value="Log In" onClick="javascript:popUp('<?= base_url($this->router->fetch_class(). '/popup_login/'.$uamip.'/'.$uamport) ?>')">
                 </form>
 
                 <!-- Remind Passowrd -->

@@ -12,11 +12,12 @@ $pappassword = implode ("", unpack("H32", ($newpwd ^ $newchal)));
   <title>ISP jet</title>
   <meta http-equiv="Cache-control" content="no-cache">
   <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="refresh" content="0;url=http://<?= $uamip ?>:<?= $uamport ?>/logon?username=<?= $username ?>&password=<?= $password ?>">;
+  <meta http-equiv="refresh" content="0;url=http://<?= $uamip ?>:<?= $uamport ?>/logon?username=<?= $username ?>&password=<?= $pappassword ?>">;
 </head>
 <body>
 <h1 style="text-align: center;">Logging in</h1>
   <center>
+      http://<?= $uamip ?>:<?= $uamport ?>/logon?username=<?= $username ?>&password=<?= $pappassword ?>
     Please wait
   </center>
 </body>

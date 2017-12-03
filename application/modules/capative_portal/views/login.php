@@ -402,6 +402,11 @@
                 <!-- Icon -->
                 <div class="fadeIn first">
                     <img src="<?= base_url('assets/img/icon.svg') ?>" id="icon" alt="User Icon" />
+                    <?php
+                        if(isset($msg)){
+                            echo $msg;
+                        }
+                    ?>
                 </div>
 
                 <!-- Login Form -->

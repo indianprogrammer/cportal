@@ -48,7 +48,7 @@ class Capative_portal extends MX_Controller {
         
         #redirect to uam server with username and papPassword
         $papPassword = $this->encodePap($password, $challenge);
-        echo 'http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword;
+        //echo 'http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword;
         redirect('http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword, 'refresh');
     }
 

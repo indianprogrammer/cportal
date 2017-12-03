@@ -405,14 +405,14 @@
                 </div>
 
                 <!-- Login Form -->
-                <form>
+                <form action="<?= base_url($this->router->fetch_class(). '/login_action/') ?>">
                     <input type="hidden" name="challenge" value="<?= $challenge ?>">
                     <input type="hidden" name="uamip" value="<?= $uamip ?>">
                     <input type="hidden" name="uamport" value="<?= $uamport ?>">
                     <input type="hidden" name="userurl" value="<?= $userurl ?>">
-                    <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+                    <input type="text" id="username" class="fadeIn second" name="username" placeholder="username">
                     <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-                    <input type="submit" class="fadeIn fourth" value="Log In" onClick="javascript:popUp('<?= base_url($this->router->fetch_class(). '/popup_login/'.$uamip.'/'.$uamport) ?>')">
+                    <input type="submit" class="fadeIn fourth" name="button" value="Log In" onClick="javascript:popUp('<?= base_url($this->router->fetch_class(). '/popup_login/'.$uamip.'/'.$uamport) ?>')">
                 </form>
 
                 <!-- Remind Passowrd -->

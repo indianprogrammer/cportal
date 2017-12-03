@@ -14,6 +14,7 @@ class Capative_portal extends MX_Controller {
 
     public function index() {
         #collect get requestes
+        var_dump($this->input->get('res'));
         $res = $this->input->get('res');
         $uamip = $this->input->get('uamip');
         $uamport = $this->input->get('uamport');
@@ -48,7 +49,7 @@ class Capative_portal extends MX_Controller {
         #redirect to uam server with username and papPassword
         $papPassword = $this->encodePap($password, $challenge);
         echo 'http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword;
-        //redirect('http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword, 'refresh');
+        redirect('http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword, 'refresh');
     }
 
     public function popup_login($uamip, $uamport) {

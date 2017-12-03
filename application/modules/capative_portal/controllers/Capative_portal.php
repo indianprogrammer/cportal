@@ -14,7 +14,7 @@ class Capative_portal extends MX_Controller {
 
     public function index() {
         #collect get requestes
-        var_dump($this->input->get('res'));
+        var_dump($this->input->get());
         $res = $this->input->get('res');
         $uamip = $this->input->get('uamip');
         $uamport = $this->input->get('uamport');

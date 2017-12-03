@@ -26,34 +26,33 @@ class Capative_portal extends MX_Controller {
         $userurl = $this->input->get('userurl');
         $md = $this->input->get('md');
 
-        switch ($res) {
-            case 'success':
-                #show success page with logoff link
-                break;
-
-            case 'failed':
-                #show error msg with login page
-                $msg = 'failed';
-                break;
-
-            case 'notyet':
-                #show login page for first timer
-                break;
-
-            default:
-                $msg = null;
-                break;
-        }
-
         $loginData = array(
             'title' => 'ISPjet Portal',
             'uamip' => $uamip,
             'uamport' => $uamport,
             'userurl' => $userurl,
-            'msg' => isset($msg)?$msg:NULL,
             'challenge' => $challenge
         );
-        $this->load->view('login', $loginData);
+        switch ($res) {
+            case 'success':
+                #show success page with logoff link
+                $this->load->view('already_login', $loginData);
+                break;
+
+            case 'failed':
+                #show error msg with login page
+                array_merge($loginData,array('msg'=>'login failed'));
+                $this->load->view('login', $loginData);
+                break;
+
+            case 'notyet':
+                $this->load->view('login', $loginData);
+                break;
+
+            default:
+                
+                break;
+        }
     }
 
     public function login_action() {

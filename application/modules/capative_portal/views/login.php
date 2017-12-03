@@ -405,7 +405,7 @@
                 </div>
 
                 <!-- Login Form -->
-                <form action="login_action">
+                <form action="capative_portal/login_action">
                     <input type="hidden" name="challenge" value="<?= $challenge ?>">
                     <input type="hidden" name="uamip" value="<?= $uamip ?>">
                     <input type="hidden" name="uamport" value="<?= $uamport ?>">

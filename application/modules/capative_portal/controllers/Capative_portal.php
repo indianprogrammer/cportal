@@ -61,7 +61,8 @@ class Capative_portal extends MX_Controller {
             'uamsecret' => $this->uamsecret,
             'challenge' => $challenge
         );
-        $this->load->view('loggingin', $loginData);
+        var_dump($loginData);
+        //$this->load->view('loggingin', $loginData);
     }
 
     public function popup_login($uamip, $uamport) {

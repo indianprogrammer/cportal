@@ -37,7 +37,7 @@ class Capative_portal extends MX_Controller {
     }
     
     public function login_action() {
-        var_dump($this->input->post());
+        //var_dump($this->input->post());
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $challenge = $this->input->post('challenge');
@@ -47,15 +47,28 @@ class Capative_portal extends MX_Controller {
         $button = $this->input->post('button');
         
         #redirect to uam server with username and papPassword
-        $papPassword = $this->encodePap($password, $challenge);
+        //$papPassword = $this->encodePap($password, $challenge);
         //echo 'http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword;
-        redirect('http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword, 'refresh');
+        //redirect('http://'.$uamip.':'.$uamport.'/logon?username='.$username.'&password='.$papPassword, 'refresh');
+        
+        $loginData = array(
+            'title' => 'Login ISPjet',
+            'uamip' => $uamip,
+            'uamport' => $uamport,
+            'userurl' => $userurl,
+            'username' => $username,
+            'password' => $password,
+            'uamsecret' => $this->uamsecret,
+            'challenge' => $challenge
+        );
+        $this->load->view('loggingin', $loginData);
     }
 
     public function popup_login($uamip, $uamport) {
         echo 'logging in please wait...' . "$uamip, $uamport";
     }
 
+    /*
     private function encodePap($password, $challenge) {
         $newchal = $this->newChalange($challenge);
         //$response = md5("\0" . $password . $newchal);
@@ -75,6 +88,7 @@ class Capative_portal extends MX_Controller {
         $response = md5("\0" . $password . $newchal);
         return $response;
     }
+     */
 
 }
 

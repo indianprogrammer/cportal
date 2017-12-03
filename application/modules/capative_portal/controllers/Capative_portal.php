@@ -36,7 +36,7 @@ class Capative_portal extends MX_Controller {
     }
     
     public function login_action() {
-        var_dump($username = $this->input->post());
+        var_dump($this->input->post());
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $challenge = $this->input->post('challenge');

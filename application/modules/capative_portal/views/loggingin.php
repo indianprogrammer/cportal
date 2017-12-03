@@ -17,8 +17,7 @@ $pappassword = implode ("", unpack("H32", ($newpwd ^ $newchal)));
 <body>
 <h1 style="text-align: center;">Logging in</h1>
   <center>
-      http://<?= $uamip ?>:<?= $uamport ?>/logon?username=<?= $username ?>&password=<?= $pappassword ?>
-    Please wait
+      Please wait
   </center>
 </body>
 </html>

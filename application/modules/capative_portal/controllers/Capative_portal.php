@@ -50,7 +50,7 @@ class Capative_portal extends MX_Controller {
             'uamip' => $uamip,
             'uamport' => $uamport,
             'userurl' => $userurl,
-            'msg' => $msg,
+            'msg' => isset($msg)?$msg:NULL,
             'challenge' => $challenge
         );
         $this->load->view('login', $loginData);

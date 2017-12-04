@@ -40,10 +40,8 @@ class Capative_portal extends MX_Controller {
                 break;
 
             case 'failed':
-                #show error msg with login page
-                var_dump($loginData);
-                array_merge($loginData,array('msg'=>'login failed'));
-                var_dump($loginData);
+                #show error msg with login page                
+                $loginData['msg']='login failed';                
                 $this->load->view('login', $loginData);
                 break;
 

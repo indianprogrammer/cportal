@@ -34,6 +34,7 @@ class Capative_portal extends MX_Controller {
         );
         switch ($res) {
             case 'success':
+            case 'already':
                 #show success page with logoff link
                 $this->load->view('already_login', $loginData);
                 break;
